@@ -1,0 +1,16 @@
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          r2dbc: DEBUG
+
+spring:
+  profile: local
+  r2dbc:
+    url: r2dbc:pool:postgres://localhost:5432/postgres
+    username: postgres
+    password: postgres
+  redis:
+    host: 127.0.0.1
+    port: 6379
