@@ -19,5 +19,8 @@ public class Order {
     private Date orderDate;
     private String orderMember;
     private String currency;
-    private Constants.ROLE role;
+    private Constants.ORDER_TYPE orderType;
+    private Long price;
+    private Long quantity;
+    private Long tradeId;
 }
