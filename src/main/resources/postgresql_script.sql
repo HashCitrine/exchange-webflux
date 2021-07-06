@@ -129,4 +129,3 @@ COMMENT ON COLUMN public.wallet.member_id IS '회원 아이디';
 COMMENT ON COLUMN public.wallet.currency IS '화폐 종류';
 COMMENT ON COLUMN public.wallet.quantity IS '보유량';
 COMMENT ON COLUMN public.wallet.average_price IS '매수 평균가';
-
