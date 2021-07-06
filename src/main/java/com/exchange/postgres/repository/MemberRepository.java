@@ -10,10 +10,12 @@ import reactor.core.publisher.Mono;
 @Repository
 public interface MemberRepository extends R2dbcRepository<Member, String> {
 
-    @Query("SELECT member_id, reg_date FROM member WHERE member_id = $1 and password = $2")
+    @Query("SELECT member_id, reg_date FROM member " +
+            "WHERE member_id = $1 and password = $2")
     Flux<Member> findByIdAndPassword(String memberId, String password);
 
-    @Query("INSERT INTO member(member_id, password, role, use_yn, reg_date, upt_date) VALUES($1, $2, 'ADMIN', 'Y', current_timestamp, current_timestamp)")
+    @Query("INSERT INTO member(member_id, password, role, use_yn, reg_date, upt_date)" +
+            " VALUES($1, $2, 'ADMIN', 'Y', current_timestamp, current_timestamp)")
     Mono<Member> register(String memberId, String password);
 
 }
