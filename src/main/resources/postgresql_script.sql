@@ -1,38 +1,32 @@
 -- DB 초기화 시 테이블 drop
 
- DROP TABLE IF EXISTS public.bankstatement;
- DROP TABLE IF EXISTS public.currency;
- DROP TABLE IF EXISTS public."instance";
- DROP TABLE IF EXISTS public."member";
- DROP TABLE IF EXISTS public.trade;
- DROP TABLE IF EXISTS public."order";
- DROP TABLE IF EXISTS public.wallet;
- DROP type IF EXISTS role cascade;
- DROP type IF EXISTS yn cascade;
- DROP type IF EXISTS order_type cascade;
- DROP type IF EXISTS transaction_type cascade;
+-- DROP TABLE IF EXISTS public.bankstatement;
+-- DROP TABLE IF EXISTS public.currency;
+-- DROP TABLE IF EXISTS public."instance";
+-- DROP TABLE IF EXISTS public."member";
+-- DROP TABLE IF EXISTS public.trade;
+-- DROP TABLE IF EXISTS public."order";
+-- DROP TABLE IF EXISTS public.wallet;
+--drop type IF EXISTS role cascade;
+--drop type IF EXISTS yn cascade;
 
 -- DB 생성
 
 CREATE TYPE role AS ENUM ('ADMIN', 'NORMAL');
 CREATE TYPE yn AS ENUM ('Y', 'N');
-CREATE TYPE order_type AS ENUM ('BUY', 'SELL');
-CREATE TYPE transaction_type AS ENUM ('DEPOSIT', 'WITHDRAW');
 
 CREATE TABLE bankstatement (
-    transaction_id bigserial NOT NULL,
-	transaction_date timestamptz NOT NULL,
+	"date" timestamptz NOT NULL,
 	member_id varchar(100) NOT NULL,
-	transaction_type transaction_type NOT NULL,
+	order_type bpchar(5) NOT NULL,
 	bank varchar(20) NOT NULL,
 	krw int8 NOT NULL,
-	CONSTRAINT bankstatement_pk PRIMARY KEY (transaction_id)
+	CONSTRAINT bankstatement_pk PRIMARY KEY (date, member_id)
 );
 
-COMMENT ON COLUMN public.bankstatement.transaction_id IS '입출금 거래 아이디';
-COMMENT ON COLUMN public.bankstatement.transaction_date IS '입출금 거래 시간';
+COMMENT ON COLUMN public.bankstatement."date" IS '입출금 거래 시간';
 COMMENT ON COLUMN public.bankstatement.member_id IS '회원 아이디';
-COMMENT ON COLUMN public.bankstatement.transaction_type IS '입출금 구분';
+COMMENT ON COLUMN public.bankstatement.order_type IS '입출금 구분';
 COMMENT ON COLUMN public.bankstatement.bank IS '은행';
 COMMENT ON COLUMN public.bankstatement.krw IS '원화';
 
@@ -105,7 +99,7 @@ CREATE TABLE "order" (
 	order_date timestamptz NOT NULL,
 	order_member varchar(100) NOT NULL,
 	currency varchar(100) NOT NULL,
-	order_type order_type NOT NULL,
+	order_type bpchar(5) NOT NULL,
 	price int8 NOT NULL,
 	quantity int8 NOT NULL,
 	trade_id int8 NULL,
@@ -135,3 +129,4 @@ COMMENT ON COLUMN public.wallet.member_id IS '회원 아이디';
 COMMENT ON COLUMN public.wallet.currency IS '화폐 종류';
 COMMENT ON COLUMN public.wallet.quantity IS '보유량';
 COMMENT ON COLUMN public.wallet.average_price IS '매수 평균가';
+

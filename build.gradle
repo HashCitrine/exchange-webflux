@@ -27,6 +27,15 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 //	implementation 'org.springframework.cloud:spring-cloud-starter-aws-messaging'
+
+//	implementation "io.springfox:springfox-boot-starter:<version>"
+//	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.5.2'
+
+	implementation group: 'org.springdoc', name: 'springdoc-openapi-webflux-ui', version: '1.4.3'
+
+
+	implementation group: 'org.springframework.plugin', name: 'spring-plugin-core', version: '2.0.0.RELEASE'
+
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'io.r2dbc:r2dbc-postgresql'
 	runtimeOnly 'org.postgresql:postgresql'
