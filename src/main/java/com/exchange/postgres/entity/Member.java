@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 @Table("member")
 public class Member {
     @Id

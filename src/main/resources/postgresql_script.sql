@@ -92,6 +92,7 @@ CREATE TABLE trade (
                        trade_date timestamptz NOT NULL,
                        buy_order_id int8 NOT NULL,
                        sell_order_id int8 NOT NULL,
+                       quantity int8 NOT NULL,
                        CONSTRAINT trade_pkey PRIMARY KEY (trade_id)
 );
 
@@ -99,6 +100,7 @@ COMMENT ON COLUMN public.trade.trade_id IS '거래 아이디';
 COMMENT ON COLUMN public.trade.trade_date IS '거래 시간';
 COMMENT ON COLUMN public.trade.buy_order_id IS '구매 주문 아이디';
 COMMENT ON COLUMN public.trade.sell_order_id IS '판매 주문 아이디';
+COMMENT ON COLUMN public.trade.quantity IS '거래량';
 
 CREATE TABLE "order" (
                          order_id bigserial NOT NULL,
@@ -108,7 +110,7 @@ CREATE TABLE "order" (
                          order_type order_type NOT NULL,
                          price int8 NOT NULL,
                          quantity int8 NOT NULL,
-                         trade_id int8 NULL,
+                         stock int8 NULL,
                          CONSTRAINT order_pkey PRIMARY KEY (order_id)
 );
 
@@ -120,7 +122,7 @@ COMMENT ON COLUMN public.order.currency IS '화폐 종류';
 COMMENT ON COLUMN public.order.order_type IS '주문 종류';
 COMMENT ON COLUMN public.order.price IS '주문지정금액';
 COMMENT ON COLUMN public.order.quantity IS '주문량';
-COMMENT ON COLUMN public.order.trade_id IS '거래 아이디';
+COMMENT ON COLUMN public.order.stock IS '미체결량';
 
 
 CREATE TABLE wallet (
