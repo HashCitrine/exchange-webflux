@@ -1,4 +1,4 @@
-package com.exchange.api;
+package com.exchange.redis;
 
 import com.exchange.redis.User;
 import com.exchange.redis.UserRedisService;

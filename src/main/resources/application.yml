@@ -8,7 +8,7 @@ logging:
 spring:
   profile: local
   r2dbc:
-    url: r2dbc:pool:postgres://localhost:5432/postgres
+    url: r2dbc:pool:postgres://localhost:5432/postgres?stringtype=unspecified
     username: postgres
     password: postgres
   redis:

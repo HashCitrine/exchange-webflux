@@ -7,19 +7,20 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 @Table("order")
 public class Order {
     @Id
     private Long orderId;
-    private Date orderDate;
+    private LocalDateTime orderDate;
     private String orderMember;
     private String currency;
-    private Constants.ORDER_TYPE orderType;
+//    private Constants.ORDER_TYPE orderType;
     private Long price;
     private Long quantity;
     private Long tradeId;

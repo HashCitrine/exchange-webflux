@@ -28,15 +28,17 @@ public class ApiApplication {
 		SpringApplication.run(ApiApplication.class, args);
 	}
 
+	// 1. R2DBC 설정
 	@Bean
 	public ConnectionFactoryInitializer initializer(ConnectionFactory connectionFactory) {
 		ConnectionFactoryInitializer initializer = new ConnectionFactoryInitializer();
 		initializer.setConnectionFactory(connectionFactory);
-//		ResourceDatabasePopulator populator = new ResourceDatabasePopulator(new ClassPathResource("schema.sql"));
+//		ResourceDatabasePopulator populator = new ResourceDatabasePopulator(new ClassPathResource("postgresql_script.sql"));
 //		initializer.setDatabasePopulator(populator);
 		return initializer;
 	}
 
+	// 2. Redis 설정
 	@Autowired
 	RedisConnectionFactory factory;
 
