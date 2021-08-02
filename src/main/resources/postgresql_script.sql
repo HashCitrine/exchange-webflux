@@ -24,7 +24,6 @@ CREATE TABLE bankstatement (
                                transaction_date timestamptz NOT NULL,
                                member_id varchar(100) NOT NULL,
                                transaction_type transaction_type NOT NULL,
-                               bank varchar(20) NOT NULL,
                                krw int8 NOT NULL,
                                CONSTRAINT bankstatement_pk PRIMARY KEY (transaction_id)
 );
@@ -33,7 +32,6 @@ COMMENT ON COLUMN public.bankstatement.transaction_id IS '입출금 거래 아�
 COMMENT ON COLUMN public.bankstatement.transaction_date IS '입출금 거래 시간';
 COMMENT ON COLUMN public.bankstatement.member_id IS '회원 아이디';
 COMMENT ON COLUMN public.bankstatement.transaction_type IS '입출금 구분';
-COMMENT ON COLUMN public.bankstatement.bank IS '은행';
 COMMENT ON COLUMN public.bankstatement.krw IS '원화';
 
 CREATE TABLE currency (

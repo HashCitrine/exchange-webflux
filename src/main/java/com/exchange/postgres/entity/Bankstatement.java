@@ -19,7 +19,6 @@ public class Bankstatement {
     private LocalDateTime transactionDate;
     private String memberId;
     private Constants.TRANSACTION_TYPE transactionType;
-    private String bank;
     private Long krw;
 
 }
