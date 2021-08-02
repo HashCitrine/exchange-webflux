@@ -7,11 +7,7 @@ import org.springframework.data.relational.core.mapping.Table;
 import java.time.LocalDateTime;
 
 @Data
-//@NoArgsConstructor
-//@AllArgsConstructor
 @Table("trade")
-//@Builder
-//@Getter @Setter
 public class Trade {
     @Id
     private Long tradeId;
