@@ -14,7 +14,8 @@ public interface TradeRepository extends R2dbcRepository<Trade, String> {
     @Query("SELECT Q1.order_id AS buy_order_id, Q2.order_id AS sell_order_id, " +
             "CASE WHEN Q1.stock > Q2.stock THEN Q2.stock ELSE Q1.stock END quantity " +
             "FROM (SELECT order_id, order_member, stock FROM \"order\" WHERE currency = $1 AND price = $2 AND \"order_type\" = 'BUY' AND stock > 0 ORDER BY order_date) Q1 " +
-            ",(SELECT order_id, order_member, stock FROM \"order\" WHERE currency = $1 AND price = $2 AND \"order_type\" = 'SELL' AND stock > 0 ORDER BY order_date) Q2 " +            "WHERE Q1.order_member != Q2.order_member " +
+            ",(SELECT order_id, order_member, stock FROM \"order\" WHERE currency = $1 AND price = $2 AND \"order_type\" = 'SELL' AND stock > 0 ORDER BY order_date) Q2 " +
+            "WHERE Q1.order_member != Q2.order_member " +
             "ORDER BY Q1.order_id, Q2.order_id " +
             "LIMIT 1")
     Mono<Trade> findTradeOrder(String currency, Long currentPrice);

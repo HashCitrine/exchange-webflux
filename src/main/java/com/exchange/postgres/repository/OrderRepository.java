@@ -15,6 +15,6 @@ import reactor.core.publisher.Mono;
 @Repository
 public interface OrderRepository extends R2dbcRepository<Order, String> {
 
-    @Query("select 1")
-    Mono<Trade> tradeSuccess(Long orderId, Constants.ORDER_TYPE orderType);
+    @Query("select order_type from \"order\" Where order_id = $1")
+    Mono<Order> testOrder(Long orderId);
 }

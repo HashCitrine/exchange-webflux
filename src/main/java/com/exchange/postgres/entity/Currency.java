@@ -7,7 +7,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 @Data
 @Table("currency")
-//@Getter @Setter
+@Builder
 public class Currency {
 
     @Id

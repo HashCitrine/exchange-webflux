@@ -1,9 +1,11 @@
 logging:
   level:
-    org:
-      springframework:
-        data:
-          r2dbc: DEBUG
+    org.springframework.data.r2dbc: DEBUG
+    com.exchange:
+      api: DEBUG
+      postgres: DEBUG
+      redis: DEBUG
+      utils: INFO
 
 spring:
   profile: local
@@ -14,7 +16,17 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
-
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: exchange
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 springdoc:
   swagger-ui.path: /swagger-ui
