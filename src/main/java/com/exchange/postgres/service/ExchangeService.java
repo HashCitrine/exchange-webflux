@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 @Service
 @Slf4j
@@ -20,9 +21,31 @@ public class ExchangeService {
     private final OrderRepository orderRepository;
     private final TradeRepository tradeRepository;
 
-    public Mono<Trade> exchange(Currency currency) {
+    public Mono<Trade> test(Currency currency){
+        return Mono.just(new Trade());
+    }
+
+//    public Mono<Trade> exchange(Currency currency) {
+        public Mono<Trade> exchange(Long orderId) {
         log.info(">>> exchange process");
 
+        // 0. 대상 화폐 조회
+        return currencyRepository.findOrderCurrency(orderId)
+                .flatMap(currency -> {
+                    log.info("currency : " + currency);
+                    // 1. 현재가 계산
+                    return currencyRepository.currentPrice(currency)
+                            .flatMap(currentPrice -> {
+                                // 2. 현재가 반영(Currency - current_price)
+                                currencyRepository.updateCurrentPrice(currentPrice.getCurrentPrice(), currentPrice.getCurrency()).subscribe();
+                                // 3. 거래 진행
+                                return trade(currentPrice, 1);
+                            })
+                            .publishOn(Schedulers.newElastic(currency));
+                });
+
+
+        /*
         // 1. 현재가 계산
         return currencyRepository.currentPrice(currency.getCurrency())
                 .flatMap(currentPrice -> {
@@ -31,6 +54,7 @@ public class ExchangeService {
                     // 3. 거래 진행
                     return trade(currentPrice, 1);
                 });
+        */
     }
 
     // 3. 거래 진행

@@ -10,6 +10,9 @@ import reactor.core.publisher.Mono;
 @Repository
 public interface CurrencyRepository extends R2dbcRepository<Currency, String> {
 
+    @Query("SELECT currency FROM \"order\" WHERE order_id = $1")
+    Mono<String> findOrderCurrency(Long orderId);
+
     @Query("SELECT 'test' AS currency, (Q1.price * Q1.stock + Q2.price * Q2.stock) / (Q1.stock + Q2.stock) AS current_price " +
             "FROM (select A.price, SUM(A.stock) AS stock " +
                 "FROM (SELECT MAX(price) as price, SUM(stock) as stock  FROM \"order\" WHERE stock > 0 AND order_type = 'BUY' AND currency = $1 GROUP BY stock ORDER BY price desc LIMIT 1) A " +
