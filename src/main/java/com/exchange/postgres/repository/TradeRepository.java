@@ -25,7 +25,7 @@ public interface TradeRepository extends R2dbcRepository<Trade, String> {
     Mono<Trade> insertTrade(Long buyOrderId, Long sellOrderId, Long quantity);
 
     @Query("UPDATE \"order\" " +
-            "SET stock = stock - $3 " +
+            "SET stock = stock - $3, status = 'SUCS'" +
             "WHERE order_id = $1 OR order_id = $2")
     Mono<Trade> updateSuccessOrder(Long buyOrderId, Long sellOrderId, Long quantity);
 }

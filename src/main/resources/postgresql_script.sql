@@ -25,6 +25,7 @@ CREATE TABLE bankstatement (
                                member_id varchar(100) NOT NULL,
                                transaction_type transaction_type NOT NULL,
                                krw int8 NOT NULL,
+                               status char(4) NOT NULL,
                                CONSTRAINT bankstatement_pk PRIMARY KEY (transaction_id)
 );
 
@@ -33,6 +34,7 @@ COMMENT ON COLUMN public.bankstatement.transaction_date IS '입출금 거래 시
 COMMENT ON COLUMN public.bankstatement.member_id IS '회원 아이디';
 COMMENT ON COLUMN public.bankstatement.transaction_type IS '입출금 구분';
 COMMENT ON COLUMN public.bankstatement.krw IS '원화';
+COMMENT ON COLUMN public.bankstatement.status IS '상태';
 
 CREATE TABLE currency (
                           currency varchar(100) NOT NULL,
@@ -108,7 +110,8 @@ CREATE TABLE "order" (
                          order_type order_type NOT NULL,
                          price int8 NOT NULL,
                          quantity int8 NOT NULL,
-                         stock int8 NULL,
+                         stock int8 NOT NULL,
+                         status char(4) NOT NULL,
                          CONSTRAINT order_pkey PRIMARY KEY (order_id)
 );
 
@@ -121,6 +124,7 @@ COMMENT ON COLUMN public.order.order_type IS '주문 종류';
 COMMENT ON COLUMN public.order.price IS '주문지정금액';
 COMMENT ON COLUMN public.order.quantity IS '주문량';
 COMMENT ON COLUMN public.order.stock IS '미체결량';
+COMMENT ON COLUMN public.order.status IS '상태';
 
 
 CREATE TABLE wallet (

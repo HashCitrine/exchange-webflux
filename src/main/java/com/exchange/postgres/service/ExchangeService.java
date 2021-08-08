@@ -7,13 +7,13 @@ import com.exchange.postgres.repository.OrderRepository;
 import com.exchange.postgres.repository.TradeRepository;
 import com.exchange.postgres.repository.WalletRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
 @Service
-@Slf4j
+@Log4j2
 @RequiredArgsConstructor
 public class ExchangeService {
     private final CurrencyRepository currencyRepository;
