@@ -1,4 +1,4 @@
-# Exchange-Eureka
+# Exchange-Webflux
 
 가상 화폐 거래소 컨셉의 MSA 서비스 구현 토이 프로젝트
 
